@@ -1,7 +1,7 @@
 # main.py
 
 from fastapi import FastAPI
-from app.controllers import site_controller, zip_controller
+from app.controllers import site_controller, zip_controller, write_file_controller
 from app_config import config
 
 # Charger la configuration en fonction de l'environnement
@@ -14,6 +14,9 @@ app = FastAPI()
 # Inclure les routes pour la génération du site et le téléchargement du fichier zip
 app.include_router(site_controller.router)
 app.include_router(zip_controller.router)
+
+# Routes KolaDev
+app.include_router(write_file_controller.router)
 
 if __name__ == "__main__":
     import uvicorn
