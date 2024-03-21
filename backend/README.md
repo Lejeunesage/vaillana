@@ -2,37 +2,38 @@
 
 Ce projet utilise une architecture MVC modulaire avec FastAPI pour le backend et Vue.js pour le frontend. Voici une explication du rôle et de l'utilité de chaque fichier et dossier :
 
-## Dossiers
+# Mon Projet FastAPI
 
-### `app/`
+Bienvenue dans mon projet FastAPI ! Ce projet est une application web basée sur FastAPI, un framework web moderne pour Python.
 
-- **`controllers/`** : Ce dossier contient les contrôleurs qui gèrent les requêtes HTTP. Chaque fichier dans ce dossier correspond à un contrôleur spécifique.
-- **`models/`** : Ce dossier contient les modèles de données de l'application.
-- **`services/`** : Ce dossier contient les services qui interagissent avec les modèles et fournissent une logique métier.
+## Installation
 
-### `templates/`
+Pour exécuter ce projet localement, suivez les étapes ci-dessous :
 
-- Ce dossier contient les fichiers de templates HTML pour le frontend. Les fichiers HTML générés seront placés ici.
+1. Assurez-vous d'avoir Python installé sur votre système. Vous pouvez télécharger Python à partir du site officiel : [python.org](https://www.python.org/).
 
-## Fichiers
+2. Clonez ce dépôt sur votre machine locale en utilisant Git :
 
-### `main.py`
+    ```
+    git clone https://github.com/Lejeunesage/vaillana.git
+    ```
 
-- Ce fichier est le point d'entrée de l'application FastAPI. Il configure et lance le serveur.
+3. Accédez au répertoire du projet :
 
-### `app/controllers/prompt_controller.py`
+    ```
+    cd vaillana
+    cd backend
+    ```
 
-- Ce fichier définit le contrôleur qui gère les requêtes liées à la récupération des informations via un prompt. Il contient une route POST `/prompt` qui attend les informations nécessaires à la génération du site.
+4. Installez les dépendances requises à l'aide de pip (le gestionnaire de paquets Python) :
 
-### `app/controllers/generation_controller.py`
+    ```
+    pip install -r requirements.txt
+    ```
 
-- Ce fichier définit le contrôleur qui gère les requêtes liées à la génération des sections du site. Il contient les routes et les fonctions pour générer les sections du site.
+## Exécution
 
-### `app/models/site_model.py`
+Une fois que toutes les dépendances sont installées, vous pouvez exécuter le projet en utilisant uvicorn, un serveur ASGI qui prend en charge FastAPI. Pour cela, exécutez la commande suivante :
 
-- Ce fichier contient le modèle de données pour le site. Il définit la structure des données nécessaires à la génération du site.
 
-### `app/services/site_generation_service.py`
-
-- Ce fichier contient le service qui génère le site à partir des données fournies. Il contient la logique métier pour la génération du site.
-
+uvicorn main:app --reload
