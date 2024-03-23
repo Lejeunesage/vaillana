@@ -31,15 +31,45 @@
             </RouterLink>
           </div>
         </div>
-        <div class="hidden md:block w-[150px] md:w-[210px] h-[150px] md:h-[210px] bg-[#F8F8F8] absolute right-[-7%] top-[-10%] rounded-full"></div>
-        <div class="w-[150px] md:w-[210px] h-[150px] md:h-[210px] bg-[#F8F8F8] absolute left-[-7%] bottom-[-10%] rounded-full"></div>
+        <div
+          class="hidden md:block w-[150px] md:w-[210px] h-[150px] md:h-[210px] bg-[#F8F8F8] absolute right-[-7%] top-[-10%] rounded-full">
+        </div>
+        <div
+          class="w-[150px] md:w-[210px] h-[150px] md:h-[210px] bg-[#F8F8F8] absolute left-[-7%] bottom-[-10%] rounded-full">
+        </div>
       </div>
     </section>
 
     <hr class="h-1 bg-gradient" />
-    <section class="bg-blue-500 my-12">
-      Section 2
-    </section>
+
+    <article class="my-8 flex justify-center flex-col gap-4">
+      <p class="text-3xl md:text-4xl text-center w-[80vw] mx-auto font-Komikula font-bold leading-tight uppercase mb-8">
+        Construisez votre site en quelques clics
+      </p>
+      <div class="flex flex-col gap-12 md:gap-16">
+        <section class="flex gap-8 md:gap-10 flex-col md:flex-row md:w-[60vw] mx-auto md:mt-[4rem] justify-center">
+          <div class="flex justify-center flex-col gap-4 w-[80vw] mx-auto">
+            <span class="text-[#9747FF] text-4xl md:text-6xl font-Komikula font-bold text-center">01</span>
+            <p class="text-justify md:text-right font-semibold">Notre plateforme facilite la création de votre site web. Pas besoin de compétences techniques, notre interface intuitive vous guide à chaque étape. Avec des modèles personnalisables et des outils conviviaux, concrétisez votre vision rapidement.</p>
+          </div>
+          <img src="../../public/assets/img/ressources/icone.png" class="mx-auto md:m-0 w-[70%] md:w-[100%]" />
+        </section>
+        <section class="flex gap-8 md:gap-10 flex-col md:flex-row md:w-[60vw] mx-auto md:mt-[4rem] justify-center">
+          <img src="../../public/assets/img/ressources/icone.png" class="mx-auto md:m-0 w-[70%] md:w-[100%]" />
+          <div class="flex justify-center flex-col gap-4 w-[80vw] mx-auto">
+            <span class="text-[#9747FF] text-4xl md:text-6xl font-Komikula font-bold text-center">02</span>
+            <p class="text-justify md:text-left font-semibold">Notre plateforme facilite la création de votre site web. Pas besoin de compétences techniques, notre interface intuitive vous guide à chaque étape. Avec des modèles personnalisables et des outils conviviaux, concrétisez votre vision rapidement.</p>
+          </div>
+        </section>
+        <section class="flex gap-8 md:gap-10 flex-col md:flex-row md:w-[60vw] mx-auto md:mt-[4rem] justify-center">
+          <div class="flex justify-center flex-col gap-4 w-[80vw] mx-auto">
+            <span class="text-[#9747FF] text-4xl md:text-6xl font-Komikula font-bold text-center">03</span>
+            <p class="text-justify md:text-right font-semibold">Notre plateforme facilite la création de votre site web. Pas besoin de compétences techniques, notre interface intuitive vous guide à chaque étape. Avec des modèles personnalisables et des outils conviviaux, concrétisez votre vision rapidement.</p>
+          </div>
+          <img src="../../public/assets/img/ressources/icone.png" class="mx-auto md:m-0 w-[70%] md:w-[100%]" />
+        </section>
+      </div>
+    </article>
 
   </main>
 </template>
