@@ -19,7 +19,20 @@
                 </svg>
             </div>
         </div>
-        <div class="mt-6 md:mt-0" v-if="openMenu">
+        <div class="md:hidden mt-6 md:mt-0" v-if="openMenu">
+            <nav class="flex flex-col justify-center gap-2 md:flex-row md:gap-4">
+                <RouterLink to="/" class="text-center p-1 inline-block uppercase font-bold ">
+                    <span class="font-Acumin" :class="{ 'line underline': $route.path === '/' }">Accueil</span>
+                </RouterLink>
+                <RouterLink to="/equipe" class="text-center p-1 rounded-lg inline uppercase font-bold ">
+                    <span class="font-Acumin" :class="{ 'line underline': $route.path === '/equipe' }">l'équipe</span>
+                </RouterLink>
+                <RouterLink to="/chatbot" class="text-center p-1 px-2 rounded-md uppercase font-bold bg-white">
+                    <span class="text-gradient font-Acumin">Commencer</span>
+                </RouterLink>
+            </nav>
+        </div>
+        <div class="mt-6 md:mt-0 hidden md:block">
             <nav class="flex flex-col justify-center gap-2 md:flex-row md:gap-4">
                 <RouterLink to="/" class="text-center p-1 inline-block uppercase font-bold ">
                     <span class="font-Acumin" :class="{ 'line underline': $route.path === '/' }">Accueil</span>
