@@ -11,6 +11,7 @@ export default {
         JakartaSans: ['JakartaSans', 'sans-serif'],
         Ballsye: ['Ballsye', 'sans-serif'],
         Komikula: ['Komikula', 'sans-serif'],
+        Acumin: ['Acumin', 'sans-serif'],
       },
     },
   },
