@@ -4,23 +4,7 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/" class="text-red-600 uppercase font-JakartaSans">Salut</RouterLink>
-        <RouterLink to="/" class="text-red-600 uppercase font-JakartaSans italic">Salut</RouterLink>
-        <RouterLink to="/" class="text-red-600 uppercase font-Ballsye">Salut</RouterLink>
-        <RouterLink to="/" class="text-red-600 uppercase font-Komikula">Salut</RouterLink>
-        <RouterLink to="/" class="text-red-600 uppercase font-Komikula">Salut</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
+ 
   <RouterView />
 </template>
 
