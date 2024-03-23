@@ -43,7 +43,7 @@
     <hr class="h-1 bg-gradient" />
 
     <article class="my-8 flex justify-center flex-col gap-4">
-      <p class="text-3xl md:text-4xl text-center w-[80vw] mx-auto font-Komikula font-bold leading-tight uppercase mb-8">
+      <p class="text-3xl md:text-4xl text-center w-[80vw] md:w-[50vw] mx-auto font-Komikula font-bold leading-tight uppercase mb-8">
         Construisez votre site en quelques clics
       </p>
       <div class="flex flex-col gap-12 md:gap-16">
