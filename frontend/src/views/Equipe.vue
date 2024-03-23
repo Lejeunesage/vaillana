@@ -1,8 +1,9 @@
 <script setup>
+
 </script>
 
 <template>
-  <main class="bg-red-500">
-    
-  </main>
+  <p class="bg-blue-500">Equipe</p>
 </template>
+
+
