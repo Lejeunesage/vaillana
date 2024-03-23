@@ -14,7 +14,7 @@
         <div class="flex flex-col gap-10 justify-center">
           <p class="uppercase font-Komikula font-bold">Votre <span class="text-[#0398C7]">site web</span> en un clic,
             tout-en-un. simple, efficace, abordable.</p>
-          <RouterLink to="/commencer">
+          <RouterLink to="/chatbot">
             <span
               class="bg-gradient w-fit text-white font-Acumin text-center p-1 px-2 rounded-full uppercase font-bold bg-white">Commencer</span>
           </RouterLink>

@@ -27,7 +27,7 @@
                 <RouterLink to="/equipe" class="text-center p-1 rounded-lg inline uppercase font-bold ">
                     <span class="font-Acumin" :class="{ 'line underline': $route.path === '/equipe' }">l'équipe</span>
                 </RouterLink>
-                <RouterLink to="/commencer" class="text-center p-1 px-2 rounded-md uppercase font-bold bg-white">
+                <RouterLink to="/chatbot" class="text-center p-1 px-2 rounded-md uppercase font-bold bg-white">
                     <span class="text-gradient font-Acumin">Commencer</span>
                 </RouterLink>
             </nav>
