@@ -55,11 +55,12 @@
           <img src="../../public/assets/img/ressources/icone.png" class="mx-auto md:m-0 w-[70%] md:w-[100%]" />
         </section>
         <section class="flex gap-8 md:gap-10 flex-col md:flex-row md:w-[60vw] mx-auto md:mt-[4rem] justify-center">
-          <img src="../../public/assets/img/ressources/icone.png" class="mx-auto md:m-0 w-[70%] md:w-[100%]" />
+          <img src="../../public/assets/img/ressources/icone.png" class="hidden md:block mx-auto md:m-0 w-[70%] md:w-[100%]" />
           <div class="flex justify-center flex-col gap-4 w-[80vw] mx-auto">
             <span class="text-[#9747FF] text-4xl md:text-6xl font-Komikula font-bold text-center">02</span>
             <p class="text-justify md:text-left font-semibold">Notre plateforme facilite la création de votre site web. Pas besoin de compétences techniques, notre interface intuitive vous guide à chaque étape. Avec des modèles personnalisables et des outils conviviaux, concrétisez votre vision rapidement.</p>
           </div>
+          <img src="../../public/assets/img/ressources/icone.png" class="md:hidden mx-auto md:m-0 w-[70%] md:w-[100%]" />
         </section>
         <section class="flex gap-8 md:gap-10 flex-col md:flex-row md:w-[60vw] mx-auto md:mt-[4rem] justify-center">
           <div class="flex justify-center flex-col gap-4 w-[80vw] mx-auto">
