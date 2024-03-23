@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <p class="bg-red-500">Home</p>
+  <p class="bg-blue-500">Equipe</p>
 </template>
 
 

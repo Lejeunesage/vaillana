@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <p class="bg-red-500">Home</p>
+  <p class="bg-green-500">Commencer</p>
 </template>
 
 
