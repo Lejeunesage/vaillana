@@ -6,42 +6,161 @@ import requests
 import shutil
 import uuid
 import zipfile
-from fastapi import APIRouter
+from fastapi import APIRouter, File, HTTPException
 from starlette.responses import FileResponse
+from fastapi.responses import FileResponse
 
 router = APIRouter()
 
-@router.get("/download-image")
-def downloadImage():
+@router.get("/download_zip/{file}")
+# Fonction qui permet de télécharger le fichier compressé
+def downloadFile(file: str):
+    folder = f'./duplicata/'
+    reponse = os.path.exists(folder + file)
+    if reponse:    
+        chemin_fichier = os.path.join(folder, file)
+        return FileResponse(chemin_fichier, filename=file)
+    else :
+        return {"error": "Le fichier est introuvable !"}
+
+# Fonction pour zipper un dossier
+def zipFolder(name: str):
+    chemin = f'./duplicata/{name}'
+    chemin_dossier_destination = f'{chemin}.zip'
+
     try:
-        url = "https://cdn.futura-sciences.com/cdn-cgi/image/width=1920,quality=50,format=auto/sources/images/dossier/773/01-intro-773.jpg"
-
-        nom_fichier = './download_image/' + uuid.uuid4().hex + '.jpg'
-
-        # Télécharger l'image en utilisant urllib
-        reponse = requests.get(url, stream=True)
-
-        if reponse.status_code == 200:
-            # Ouvrir un fichier en mode écriture binaire pour sauvegarder l'image
-            with open(nom_fichier, 'wb') as f:
-                # Écrire le contenu de la réponse dans le fichier par petits morceaux
-                for morceau in reponse.iter_content(1024):
-                    f.write(morceau)
+       if os.path.exists(chemin):
+            with zipfile.ZipFile(chemin_dossier_destination, 'w', zipfile.ZIP_DEFLATED) as zipf:
+                for root, _, files in os.walk(chemin):
+                    for file in files:
+                        zipf.write(os.path.join(root, file), os.path.relpath(os.path.join(root, file), chemin))
             return {"success": True}
-        else:
-            # Afficher un message si la requête échoue
-            return {"error": "La requête a échoué !"}
+    except:
+        return {"error": "Impossible de zipper le dossier !!!"}
+
+# Fonction pour supprimer un dossier
+def rmtreeFolder(name: str):
+    folder = f'./duplicata/{name}'
+    try:
+        if os.path.exists(folder):
+            shutil.rmtree(folder)
+        return {"success": True, "nom_fichier": f'{name}.zip'}
+    except Exception as e:
+        return {"error": e}
+    except:
+        return {"error": "Impossible de supprimer ce dossier !!"}
+
+# Fonction pour télécharger des images et faire la réecriture dans le fichier html
+def downloadImage(destination, chemin, occurence, urls):
+    try:
+        # Liste d'images
+        images = []
+        for element in urls:
+            # Télécharger l'image en utilisant urllib
+            reponse = requests.get(element, stream=True)
+
+            if reponse.status_code == 200:
+                # Extraire le type MIME de la réponse
+                type_mime = reponse.headers.get('content-type')
+
+                # Déterminer l'extension de fichier appropriée en fonction du type MIME
+                if type_mime == 'image/jpeg':
+                    extension = 'jpg'
+                elif type_mime == 'image/png':
+                    extension = 'png'
+                
+                img = uuid.uuid4().hex + '.' + extension
+
+                nom_fichier = destination + "/assets/" + img
+                # Ouvrir un fichier en mode écriture binaire pour sauvegarder l'image
+                with open(nom_fichier, 'wb') as f:
+                    # Écrire le contenu de la réponse dans le fichier par petits morceaux
+                    for morceau in reponse.iter_content(1024):
+                        f.write(morceau)
+
+                images.append("./assets/" + img)
+        
+        # Je vérifie si le chemin du fichier existe
+        if os.path.exists(chemin):
+            # Ouvrir le fichier en mode lecture ('r' pour read)
+            with open(chemin, 'r', encoding='utf-8') as fichier:
+                # Lire tout le contenu du fichier
+                contenu = fichier.read()
+
+            # Le fichier est automatiquement fermé après la sortie du bloc 'with'
+
+            # Utiliser re.findall() pour trouver toutes les occurrences du mot dans le contenu
+            all_occurences = re.findall(r'\b' + re.escape(occurence) + r'\b', contenu, flags=re.IGNORECASE)
+            
+            # Si la longueur de all_occurences est supérieure à 0, fais :
+            if (len(all_occurences) > 0):
+
+            # Lire le contenu du fichier dans une liste
+                with open(chemin, 'r', encoding='utf-8') as file:
+                    lines = file.readlines()
+
+                # Chercher l'élément dans chaque ligne du fichier
+                lines_find = [i for i, line in enumerate(lines) if occurence in line]
+
+            if (len(all_occurences) > 0) :
+                if(len(all_occurences) == len(images)):
+                    [lines.__setitem__(x, re.sub(all_occurences[i], images[i], lines[x], flags=re.MULTILINE) + '\n') for i, x in enumerate(lines_find) if 0 <= x < len(lines)]
+                
+                # Écrire la liste modifiée dans le fichier
+                with open(chemin, 'w', encoding='utf-8') as file:
+                    file.writelines(lines)
+                return {'success': True} 
+            else :
+                return {'error': 'Aucune occurrence !'}
+        else :
+            return {'error': "Le fichier n'existe pas"}
     except Exception as e:
         # Afficher une erreur en cas de problème
         return{"error", str(e)}
 
+# Fonction pour écrire dans le fichier css
+def writeFileCss(line, search, valeur):
+    # Mot à rechercher
+    motif = rf'{search}'
+    # Je vérifie si le chemin du fichier existe
+    if os.path.exists(line):
+        # Ouvrir le fichier en mode lecture ('r' pour read)
+        with open(line, 'r', encoding='utf-8') as fichier:
+            # Lire toutes les lignes du fichier
+            lignes = fichier.readlines()
+
+        # Rechercher les lignes contenant le motif spécifié
+        all_occurences = [ligne.strip() for ligne in lignes if motif.lower() in ligne.lower()]
+
+        if len(all_occurences) > 0 :
+            variable = all_occurences[0]
+
+            # Convertir la liste de lignes en une seule chaîne de caractères
+            contenu = ''.join(lignes)
+            # Effectuer le remplacement dans la chaîne de caractères
+            updateFile = re.sub(re.escape(variable), valeur, contenu, flags=re.MULTILINE)
+
+            # Ouvrir le fichier en mode écriture ('w' pour write) pour écrire le contenu modifié
+            with open(line, 'w') as fichier:
+                # Écrire le contenu modifié dans le fichier
+                fichier.write(updateFile)
+                
+        else :
+            return {"error": "Pas d'occurences !"}
+    else :
+        return {"error": "Ce fichier n'existe pas !"}
+
+# Fonction pour écrire dans tous les fichiers se trouvant dans le template
 @router.get("/write-file")
 def writeFile(nameDossier='kola_dev'):
-
+    # Nouvelles couleurs du template
+    colors_template = ["#ffffff", "#c33", "#336699"]
     # Dossier contenant tout le code du site
     source = "./templates/Template1"
+
+    nameSite = nameDossier.replace(" ", "_")
     # Chemin de destination pour la copie du dossier
-    destination = './duplicata/' + nameDossier
+    destination = './duplicata/' + nameSite
 
     # Je rappelle ma fonction de copie
     recupInfoFolder = copyFolder(source, destination)
@@ -70,9 +189,37 @@ def writeFile(nameDossier='kola_dev'):
 
                     # Je rappelle ma fonction de réecriture des articles du site
                     writeArticle = writeArticleOfSite(chemin, variable, articles)
-                    return writeArticle
+
+                    # Liste d'images
+                    urls_images = ["https://cdn.futura-sciences.com/cdn-cgi/image/width=1920,quality=50,format=auto/sources/images/dossier/773/01-intro-773.jpg", "https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg", "https://img.freepik.com/photos-gratuite/beaute-abstraite-automne-dans-motif-veines-feuilles-multicolores-genere-par-ia_188544-9871.jpg", "https://etudestech.com/wp-content/uploads/2023/05/midjourney-1536x1024.jpeg"]
+
+                    word_found = "my_file_jpg_yx_2024_hf_cp"
+
+                    # Je rappelle ma fonction de téléchargement des images et de réecriture
+                    downloads = downloadImage(destination, chemin, word_found, urls_images)
+                    
+                    if 'success' in downloads:
+                        if (downloads['success']):
+                            line = destination + "/css/styles.css"
+                            search_css = ["--couleur-principale:", "--couleur-secondaire:", "--couleur-tertiaire:"]
+                            valeurs = [f"--couleur-principale: {colors_template[0]};", f"--couleur-secondaire: {colors_template[1]};", f"--couleur-tertiaire: {colors_template[2]};"]
+                            for (i, search) in enumerate(search_css) :
+                                css = writeFileCss(line, search_css[i], valeurs[i])
+                            
+                            # Je rappelle ma fonction pour zipper un dossier
+                            zipFolders = zipFolder(nameSite)
+    
+                            if 'success' in zipFolders:
+                                if (zipFolders['success']):
+
+                                    rmtreeFolders = rmtreeFolder(nameSite)
+                                    if 'success' in rmtreeFolders:
+                                        if (rmtreeFolders['success']):
+
+                                            return {"success": True, "message:": "Site généré avec succès !", "link_generate": "http://localhost:8000/download_zip/" + rmtreeFolders["nom_fichier"]}
+                                    # return {"success": True, "message": "Site généré !"}
     else :
-        return recupInfoFolder
+        return {"error": "Une erreur est survenue lors de la génération !"}
 
 
 # Fonction pour copier tout le contenu d'un dossier
@@ -170,7 +317,8 @@ def writeArticleOfSite(chemin, occurence, articles):
                 lines_find = [i for i, line in enumerate(lines) if occurence in line]
 
             if (len(all_occurences) > 0) :
-                [lines.__setitem__(x, re.sub(all_occurences[i], articles[i], lines[x], flags=re.MULTILINE) + '\n') for i, x in enumerate(lines_find) if 0 <= x < len(lines)]
+                if(len(all_occurences) == len(articles)):
+                    [lines.__setitem__(x, re.sub(all_occurences[i], articles[i], lines[x], flags=re.MULTILINE) + '\n') for i, x in enumerate(lines_find) if 0 <= x < len(lines)]
                 
                 # Écrire la liste modifiée dans le fichier
                 with open(chemin, 'w', encoding='utf-8') as file:
