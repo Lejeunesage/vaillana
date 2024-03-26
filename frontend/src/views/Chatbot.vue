@@ -462,6 +462,8 @@ let fithAnswer = ref(true);
 let sixAnswer = ref(true);
 let submitAnswer = ref(true);
 let preview = ref(true);
+let inputName = ref(true);
+let selectName = ref(true);
 
 
 
