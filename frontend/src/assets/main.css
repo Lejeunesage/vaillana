@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@font-face {
+    font-family: 'Komikula';
+    src: url('Komikula-Bold.woff2') format('woff2'),
+        url('Komikula-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Komikula';
+    src: url('Komikula.woff2') format('woff2'),
+        url('Komikula.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ballsye';
+    src: url('BallsyeRegular.woff2') format('woff2'),
+        url('BallsyeRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('PlusJakartaSans-Italic.woff2') format('woff2'),
+        url('PlusJakartaSans-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    src: url('PlusJakartaSans-Regular.woff2') format('woff2'),
+        url('PlusJakartaSans-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acumin';
+    src: url('Acumin.woff2') format('woff2'),
+        url('Acumin.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+.palettes {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .palette {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .couleur {
+    width: 33.33%;
+    height: 50px;
+    margin-bottom: 5px;
+  }
+  
+  .couleur1 {
+    background-color: #f72585;
+  }
+  
+  .couleur2 {
+    background-color: #b5179e;
+  }
+  
+  .couleur3 {
+    background-color: #7209b7;
+  }
+  
+  /* Code pour afficher les codes couleurs au clic */
+  
+  .palette:hover .couleur {
+    opacity: 0.7;
+  }
+  
+  .palette:hover .code-couleurs {
+    display: block;
+  }
+  
+  .code-couleurs {
+    display: none;
+    margin-top: 5px;
+    font-size: 12px;
+  }
+
+
+
