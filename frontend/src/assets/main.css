@@ -59,4 +59,54 @@
 }
 
 
+.palettes {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .palette {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .couleur {
+    width: 33.33%;
+    height: 50px;
+    margin-bottom: 5px;
+  }
+  
+  .couleur1 {
+    background-color: #f72585;
+  }
+  
+  .couleur2 {
+    background-color: #b5179e;
+  }
+  
+  .couleur3 {
+    background-color: #7209b7;
+  }
+  
+  /* Code pour afficher les codes couleurs au clic */
+  
+  .palette:hover .couleur {
+    opacity: 0.7;
+  }
+  
+  .palette:hover .code-couleurs {
+    display: block;
+  }
+  
+  .code-couleurs {
+    display: none;
+    margin-top: 5px;
+    font-size: 12px;
+  }
+
+
 
