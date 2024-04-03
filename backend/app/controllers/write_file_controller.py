@@ -156,7 +156,7 @@ def writeFile(nameDossier='kola_dev'):
     # Nouvelles couleurs du template
     colors_template = ["#ffffff", "#c33", "#336699"]
     # Dossier contenant tout le code du site
-    source = "./templates/Template1"
+    source = "./exemples/Template1"
 
     nameSite = nameDossier.replace(" ", "_")
     # Chemin de destination pour la copie du dossier
