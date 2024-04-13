@@ -285,8 +285,6 @@ let sendMessage = () => {
   data.siteName = siteName.value;
   data.category = category.value;
   data.palettes = colors.value;
-  console.log("data.palettes")
-  console.log(selectedPalette.value)
 
   firstColorSelected.value = selectedPalette.value.couleur1
   secondColorSelected.value = selectedPalette.value.couleur2
@@ -543,6 +541,8 @@ let preview = ref(false);
 let SubmitButton = ref(true);
 let showNextButton1 = ref(true);
 let showNextButton2 = ref(true);
+let selectedCategory = ref("");
+let receiveButton = ref(true)
 
 setTimeout(() => {
   firstQuestion2.value = true;
@@ -556,6 +556,7 @@ setTimeout(() => {
   firstAnswer.value = true;
 }, 7000);
 
+// Fonction appelée lors de soumission du nom de l'utilisateur
 const showUserAnswer2 = () => {
   if(fullName.value == '') {
     secondAnswer.value = false;
@@ -565,9 +566,9 @@ const showUserAnswer2 = () => {
   }
 }
 
-let selectedCategory = ref("");
-let receiveButton = ref(true)
 
+
+// Fonction appelée lors de soumission du domaine d'activité
 const handleCategory = (event) => {
   selectedCategory.value = event.target.value;
   if (selectedCategory.value != "") {
@@ -578,6 +579,7 @@ const handleCategory = (event) => {
   }
 }
 
+// Fonction appelée lors de soumission du nom de l'entreprise
 const showUserAnswer3 = () => {
   if(siteName.value == '') {
     fourthAnswer.value = false;
@@ -587,7 +589,7 @@ const showUserAnswer3 = () => {
   }
 }
 
-
+// Fonction appelée lors de l'envoi de l'adresse email
 const sendWebSite = () => {
     preview.value = true;
     receiveButton.value = false;
