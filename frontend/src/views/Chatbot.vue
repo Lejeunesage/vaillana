@@ -1,6 +1,6 @@
 <template>
-  <div class="bgImage">
-    <div class="py-8 bg-[#eeeeeedf]">
+  <div class="bgImage ">
+    <div class="py-8 bg-[#eeeeeedf] h-screen">
       <div class="mx-4">
         <section class="bg-[#9747ff2c] rounded-xl p-4">
           <div class="flex justify-center pt-4">
@@ -58,7 +58,7 @@
                         name="fullName"
                         v-model = "fullName"
                         id=""
-                        class="ml-1 font-bold bg-transparent border-0 border-b-2 appearance-none text-black border-[#9747FF] focus:border-[#0398C7] focus:outline-none focus:ring-0peer" /></span
+                        class="ml-1 w-[70%] sm:w-auto font-bold bg-transparent border-0 border-b-2 appearance-none text-black border-[#9747FF] focus:border-[#0398C7] focus:outline-none focus:ring-0peer" /></span
                     >.
                     <button @click="showUserAnswer2()" v-if="showNextButton1" class="relative inline-flex items-center justify-center px-3 py-0 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500">
                           <span class="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
@@ -76,7 +76,7 @@
                     @change="handleCategory($event)"
                       id="categories"
                       v-model ="category"
-                      class="font-bold bg-transparent border-0 border-b-2 appearance-none text-black border-[#9747FF] focus:border-[#0398C7] focus:outline-none focus:ring-0peer"
+                      class="font-bold w-[70%] sm:w-auto bg-transparent border-0 border-b-2 appearance-none text-black border-[#9747FF] focus:border-[#0398C7] focus:outline-none focus:ring-0peer"
                     >
                       <option selected disabled></option>
                       <option
@@ -100,7 +100,7 @@
                       name="siteName"
                       v-model = "siteName"
                       id=""
-                      class="font-bold bg-transparent border-0 border-b-2 appearance-none text-black border-[#9747FF] focus:border-[#0398C7] focus:outline-none focus:ring-0peer" /></span
+                      class="font-bold w-[70%] sm:w-auto bg-transparent border-0 border-b-2 appearance-none text-black border-[#9747FF] focus:border-[#0398C7] focus:outline-none focus:ring-0peer" /></span
                   > .
                   <button @click="showUserAnswer3()" v-if="showNextButton2" class="relative inline-flex items-center justify-center px-3 py-0 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500">
                           <span class="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
@@ -201,28 +201,30 @@
 
             <!-- Deuxième réponse de l'utilisateur -->
             <div class="flex justify-end items-end flex-col ml-16" v-if="isUserEmail">
-                <p
-                  class="user"
-                  v-for="(response, index) in userResponses.slice(1, 2)"
-                  :key="index"
-                >
-                  {{ response.response1 }}
-                  <span class="flex items-center">
-                    <span class="transition-all delay-1000">
-                      <input
-                        type="email"
-                        name="fullName"
-                        v-model = "email"
-                        id=""
-                        class="font-bold bg-transparent border-0 border-b-2 appearance-none text-black border-[#9747FF] focus:border-[#0398C7] focus:outline-none focus:ring-0peer" /></span
-                    >
-                    <button @click="sendWebSite()" v-if="receiveButton" class=" ml-3 mt-3 relative inline-flex items-center justify-center px-3 py-1 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500">
-                            <span class="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
-                            <span class="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
-                            <span class="relative text-white text-sm">Recevoir</span>
-                        </button>
-                  </span>
-                </p>
+                <form action="" @submit.prevent="sendWebSite()">
+                  <p
+                    class="user"
+                    v-for="(response, index) in userResponses.slice(1, 2)"
+                    :key="index"
+                  >
+                    {{ response.response1 }}
+                    <span class="flex items-center">
+                      <span class="transition-all delay-1000">
+                        <input
+                          type="email"
+                          name="fullName"
+                          v-model = "email"
+                          id=""
+                          class="font-bold w-[70%] sm:w-auto bg-transparent border-0 border-b-2 appearance-none text-black border-[#9747FF] focus:border-[#0398C7] focus:outline-none focus:ring-0peer" /></span
+                      >
+                      <button type="submit" v-if="receiveButton" class=" ml-3 mt-3 relative inline-flex items-center justify-center px-3 py-1 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500">
+                              <span class="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
+                              <span class="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
+                              <span class="relative text-white text-sm">Recevoir</span>
+                          </button>
+                    </span>
+                  </p>
+                </form>
             </div>
             <Loader class="ml-auto mt-2 bg-red-500" v-if="userAnswer && firstAnswer && secondAnswer && thirdAnswer && fourthAnswer && secondQuestion1 && secondQuestion2 && thirdQuestion1 && thirdQuestion2 && isUserEmail && !fourthQuestion" />
 
