@@ -49,7 +49,6 @@
 
             <!-- Première réponse de l'utilisateur -->
             <div class="flex justify-end items-end flex-col ml-16" v-if="userAnswer">
-              <form action="" @submit.prevent="">
 
                 <p v-if="firstAnswer" class="user">
                   <span >{{ userResponses[0].response1 }}</span>
@@ -61,7 +60,7 @@
                         id=""
                         class="ml-1 font-bold bg-transparent border-0 border-b-2 appearance-none text-black border-[#9747FF] focus:border-[#0398C7] focus:outline-none focus:ring-0peer" /></span
                     >.
-                    <button @click="showUserAnswer2()" class="relative inline-flex items-center justify-center px-3 py-0 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500">
+                    <button @click="showUserAnswer2()" v-if="showNextButton1" class="relative inline-flex items-center justify-center px-3 py-0 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500">
                           <span class="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
                           <span class="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
                           <span class="relative text-white text-sm">Suivant</span>
@@ -103,7 +102,7 @@
                       id=""
                       class="font-bold bg-transparent border-0 border-b-2 appearance-none text-black border-[#9747FF] focus:border-[#0398C7] focus:outline-none focus:ring-0peer" /></span
                   > .
-                  <button @click="showUserAnswer3()" class="relative inline-flex items-center justify-center px-3 py-0 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500">
+                  <button @click="showUserAnswer3()" v-if="showNextButton2" class="relative inline-flex items-center justify-center px-3 py-0 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500">
                           <span class="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
                           <span class="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
                           <span class="relative text-white text-sm">Suivant</span>
@@ -115,7 +114,7 @@
                 <p class="user" v-if="fourthAnswer">
                   <span>{{ userResponses[0].response4 }}</span>
 
-                  <div class="grid grid-cols-4 gap-1 my-2 justify-center">
+                  <div class="grid grid-cols-4 gap-1 my-2 justify-center" v-if="showAllPalette">
                     <div
                       v-for = "palette in palettes"
                       :key="palette.id"
@@ -137,6 +136,23 @@
                       ></div>
                     </div>
                   </div>
+                    <div v-if="showSelectedPalette"
+                      class="flex z-40 cursor-pointer mt-5 w-[60%] mx-auto rounded-lg border-2 border-transparent"
+                    >
+                      <div
+                        class="w-[34%] h-10 rounded-s-lg"
+                        :style="{ backgroundColor: firstColorSelected }"
+                      ></div>
+                      <div
+                        class="w-[34%] h-10"
+                        :style="{ backgroundColor: secondColorSelected }"
+                      ></div>
+                      <div
+                        class="w-[33%] h-10 rounded-e-lg"
+                        :style="{ backgroundColor: thirdColorSelected }"
+                      ></div>
+                    </div>
+                  
                   <div class="flex justify-center mt-3" v-if="SubmitButton">
                     <button @click="sendMessage()" class="relative inline-flex items-center justify-center px-3 py-2 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500">
                             <span class="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
@@ -145,7 +161,6 @@
                         </button>
                   </div>
                 </p>
-              </form>
             </div>
 
             <Loader class="ml-auto mt-2" v-if="userAnswer && firstAnswer && secondAnswer && thirdAnswer && fourthAnswer && !secondQuestion1" />
@@ -250,6 +265,11 @@ let email = ref("");
 let siteName = ref("");
 let category = ref("");
 let colors = ref([]);
+let firstColorSelected = ref("")
+  let secondColorSelected = ref("")
+  let thirdColorSelected = ref("")
+  let showAllPalette = ref(true)
+  let showSelectedPalette = ref(false)
 
 let data = {
   fullName: fullName.value,
@@ -265,8 +285,16 @@ let sendMessage = () => {
   data.siteName = siteName.value;
   data.category = category.value;
   data.palettes = colors.value;
+  console.log("data.palettes")
+  console.log(selectedPalette.value)
+
+  firstColorSelected.value = selectedPalette.value.couleur1
+  secondColorSelected.value = selectedPalette.value.couleur2
+  thirdColorSelected.value = selectedPalette.value.couleur3
   SubmitButton.value = false;
   secondQuestion1.value = true;
+  showAllPalette.value = false;
+  showSelectedPalette.value = true;
   setTimeout(() => {
     secondQuestion2.value = true;
     loader.value = true;
@@ -282,8 +310,11 @@ let sendMessage = () => {
 
 };
 
+let selectedPalette = ref([]);
+
 let getColors = (palette) => {
   paletteSelectionneeId.value = palette.id;
+  selectedPalette.value = palettes.find(palet => palet.id === palette.id);
   colors.value.push(palette.couleur1);
   colors.value.push(palette.couleur2);
   colors.value.push(palette.couleur3);
@@ -510,6 +541,8 @@ let thirdAnswer = ref(false);
 let fourthAnswer = ref(false);
 let preview = ref(false);
 let SubmitButton = ref(true);
+let showNextButton1 = ref(true);
+let showNextButton2 = ref(true);
 
 setTimeout(() => {
   firstQuestion2.value = true;
@@ -528,6 +561,7 @@ const showUserAnswer2 = () => {
     secondAnswer.value = false;
   } else {
     secondAnswer.value = true;
+    showNextButton1.value = false;
   }
 }
 
@@ -540,6 +574,7 @@ const handleCategory = (event) => {
     thirdAnswer.value = true;
   } else {
     thirdAnswer.value = false;
+    
   }
 }
 
@@ -548,6 +583,7 @@ const showUserAnswer3 = () => {
     fourthAnswer.value = false;
   } else {
     fourthAnswer.value = true;
+    showNextButton2.value = false;
   }
 }
 
