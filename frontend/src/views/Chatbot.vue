@@ -186,7 +186,6 @@
 
             <!-- Deuxième réponse de l'utilisateur -->
             <div class="flex justify-end items-end flex-col ml-16" v-if="isUserEmail">
-              <form action=""  @submit.prevent="sendMessage()">
                 <p
                   class="user"
                   v-for="(response, index) in userResponses.slice(1, 2)"
@@ -209,9 +208,8 @@
                         </button>
                   </span>
                 </p>
-              </form>
             </div>
-            <Loader class="ml-auto mt-2" v-if="userAnswer && firstAnswer && secondAnswer && thirdAnswer && fourthAnswer && secondQuestion1 && secondQuestion2 && thirdQuestion1 && thirdQuestion2 && !loader && isUserEmail && !fourthQuestion" />
+            <Loader class="ml-auto mt-2 bg-red-500" v-if="userAnswer && firstAnswer && secondAnswer && thirdAnswer && fourthAnswer && secondQuestion1 && secondQuestion2 && thirdQuestion1 && thirdQuestion2 && isUserEmail && !fourthQuestion" />
 
             <!-- Quatrième question -->
             <p
@@ -219,8 +217,6 @@
               v-if="fourthQuestion"
               v-html="pandaQuestions[7].question"
             ></p>
-
-            <Loader class="mt-2" v-if="userAnswer && firstAnswer && secondAnswer && thirdAnswer && fourthAnswer && secondQuestion1 && secondQuestion2 && thirdQuestion1 && thirdQuestion2 && !loader && isUserEmail && fourthQuestion && !preview" />
           </section>
         </section>
         <div class="flex justify-center mt-8" v-if="preview">
@@ -557,10 +553,9 @@ const showUserAnswer3 = () => {
 
 
 const sendWebSite = () => {
-  setTimeout(() => {
     preview.value = true;
     receiveButton.value = false;
-  }, 2000);
+    fourthQuestion.value = true;
 }
 </script>
 
