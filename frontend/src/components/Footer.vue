@@ -1,8 +1,10 @@
 <template>
-    <footer class="text-white font-bold text-center lg:max-w-5xl xl:max-w-6xl mx-auto">
-      <p class="p-4 text-[0.7rem] md:text-[0.8rem]">
-        {{ currentYear }} - VAILLANA - Tous droits réservés.
-      </p>
+    <footer class="">
+      <div class="text-white font-bold text-center lg:max-w-5xl xl:max-w-6xl mx-auto">
+        <p class="p-4 text-[0.7rem] md:text-[0.8rem]">
+          {{ currentYear }} - VAILLANA - Tous droits réservés.
+        </p>
+      </div>
     </footer>
   </template>
   
