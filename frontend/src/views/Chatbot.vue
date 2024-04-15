@@ -1,6 +1,6 @@
 <template>
-  <div class="bgImage ">
-    <div class="py-8 bg-[#eeeeeedf] h-screen">
+  <div class="bgImage">
+    <div class="py-8 bg-[#eeeeeedf] h-[130vh] sm:h-[120vh]">
       <div class="mx-4">
         <section class="bg-[#9747ff2c] rounded-xl p-4">
           <div class="flex justify-center pt-4">
