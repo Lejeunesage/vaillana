@@ -22,7 +22,8 @@
 
 .dot-loader {
   position: relative;
-  background: #f7f4f4 ;
+  /* background: #f7f4f4  */
+  background: linear-gradient(to top left, #0398c7 0%, #9747ff 100%);;
   width: 50px;
   height: 30px;
   border-radius: 30px;
@@ -41,7 +42,8 @@
   width: 8px;
   height: 8px;
   border-radius: 8px;
-  background: #131111;
+  /* background: #131111; */
+  background-color: white;
   animation: anim 0.5s ease alternate infinite;
   left: 10px;
 }
@@ -51,7 +53,8 @@
   width: 8px;
   height: 8px;
   border-radius: 8px;
-  background: #131111;
+  /* background: #131111; */
+  background-color: white;
   animation: anim 0.5s ease alternate infinite;
   left: 22px;
   animation-delay: 0.2s;
@@ -62,7 +65,8 @@
   width: 8px;
   height: 8px;
   border-radius: 8px;
-  background: #131111;
+  /* background: #131111; */
+  background-color: white;
   animation: anim 0.5s ease alternate infinite;
   left: 34px;
   animation-delay: 0.3s;
