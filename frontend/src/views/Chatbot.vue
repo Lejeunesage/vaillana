@@ -1,6 +1,6 @@
 <template>
-  <div class="bgImage">
-    <div class="py-8 bg-[#eeeeeedf] h-[130vh] sm:h-[120vh]">
+  <div class="bgImage ">
+    <div class="py-8 bg-[#eeeeeedf] flex flex-col justify-between min-h-screen">
       <div class="mx-4">
         <section class="bg-[#9747ff2c] rounded-xl p-4">
           <div class="flex justify-center pt-4">
@@ -292,7 +292,6 @@ let sendMessage = () => {
   firstColorSelected.value = selectedPalette.value.couleur1
   secondColorSelected.value = selectedPalette.value.couleur2
   thirdColorSelected.value = selectedPalette.value.couleur3
-  console.log("hello", selectedPalette.value)
 
   if(selectedPalette.value.length != 0) {
     
@@ -579,7 +578,6 @@ setTimeout(() => {
 // Fonction appelée lors de soumission du nom de l'utilisateur
 const showUserAnswer2 = () => {
   let next1 = document.getElementById('Next1');
-  console.log(next1)
   if(fullName.value == '') {
     secondAnswer.value = false;
   } else {
